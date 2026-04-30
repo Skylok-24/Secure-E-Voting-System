@@ -8,9 +8,4 @@
 - SQLite Database
 
 ## Run
-
-### Server
-python server/voting_server.py
-
-### Client
-python client/gui_client.py
+python main.py
