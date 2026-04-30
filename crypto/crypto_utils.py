@@ -1,6 +1,6 @@
 import hashlib
 import json
-from rsa_utils import generate_keys
+from .rsa_utils import generate_keys
 
 # hash
 def hash_data(data):

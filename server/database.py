@@ -1,7 +1,9 @@
 import sqlite3
+import os
 
 def init_db():
-    conn = sqlite3.connect("../data/voting.db")
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "voting.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     # جدول الأصوات
@@ -23,7 +25,8 @@ def init_db():
     conn.close()
 
 def has_voted(voter_id):
-    conn = sqlite3.connect("../data/voting.db")
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "voting.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM voted WHERE voter_id=?", (voter_id,))
@@ -34,7 +37,8 @@ def has_voted(voter_id):
 
 
 def save_vote(voter_id, vote):
-    conn = sqlite3.connect("../data/voting.db")
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "voting.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute("INSERT INTO votes VALUES (?, ?)", (voter_id, vote))
@@ -44,7 +48,8 @@ def save_vote(voter_id, vote):
     conn.close()
 
 def get_results():
-    conn = sqlite3.connect("../data/voting.db")
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "voting.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute("SELECT vote, COUNT(*) FROM votes GROUP BY vote")

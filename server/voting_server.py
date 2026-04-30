@@ -3,7 +3,7 @@ import json
 
 from crypto.rsa_utils import generate_keys, decrypt
 from crypto.crypto_utils import verify
-from database import init_db, has_voted, save_vote, get_results
+from .database import init_db, has_voted, save_vote, get_results
 
 HOST = '127.0.0.1'
 PORT = 5001
@@ -48,6 +48,7 @@ while True:
     # 🔥 3. التصويت
     try:
         voter_id = packet["voter_id"]
+        voter_id = "".join(voter_id.lower().split())
         encrypted_vote = packet["vote"]
         signature = packet["signature"]
         client_public = tuple(packet["public_key"])
